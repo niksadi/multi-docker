@@ -13,7 +13,7 @@ after_success:
   - docker build -t niksadi/multi-nginx ./nginx
   - docker build -t niksadi/multi-server ./server
   - docker build -t niksadi/multi-worker ./worker
-  - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push  niksadi/multi-client
   - docker push  niksadi/multi-nginx
   - docker push  niksadi/multi-server
