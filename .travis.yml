@@ -1,0 +1,22 @@
+language: generic
+sudo: required
+services: 
+  - docker
+
+before-install:
+  - docker build -t niksadi/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run niksadi/react-test npm test
+after-success:
+  - docker build -t niksadi/multi-client ./client
+  - docker build -t niksadi/multi-nginx ./nginx
+  - docker build -t niksadi/multi-server ./server
+  - docker build -t niksadi/multi-worker ./worker
+
+  # Login to docker cli
+  - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push  niksadi/multi-client
+  - docker push  niksadi/multi-nginx
+  - docker push  niksadi/multi-server
+  - docker push  niksadi/multi-worker 
