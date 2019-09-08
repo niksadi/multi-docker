@@ -8,7 +8,7 @@ before_install:
 
 script:
   - docker run -e CI=true niksadi/react-test npm test
-after-success:
+after_success:
   - docker build -t niksadi/multi-client ./client
   - docker build -t niksadi/multi-nginx ./nginx
   - docker build -t niksadi/multi-server ./server
