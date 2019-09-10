@@ -26,6 +26,7 @@
             "name":"nginx",
             "image":"niksadi/multi-nginx",
             "essential":true,
+            "memory":128,
             "portMappings":[
                 {
                     "hostPort":80,
